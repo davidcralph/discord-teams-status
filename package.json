@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "axios": "^0.24.0",
+    "discord.js": "^13.3.1",
+    "puppeteer-extra": "^3.2.3",
+    "puppeteer-extra-plugin-stealth": "^2.9.0",
+    "string-progressbar": "^1.0.4"
+  }
+}

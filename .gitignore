@@ -1,0 +1,9 @@
+# Directories
+.vscode/
+user_data/
+node_modules/
+
+# Files
+yarn.lock
+config.json
+package-lock.json
