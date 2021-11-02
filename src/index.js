@@ -22,6 +22,7 @@ const doStuff = async () => {
     const page = await browser.newPage();
     await page.goto('https://teams.microsoft.com');
     await page.waitFor(config.timeout);
+
     const data = await page.evaluate(() => {
         let check = true;
         let presenceToken;
@@ -29,6 +30,7 @@ const doStuff = async () => {
             if (check === false) {
                 return;
             }
+
             if (key.includes('presence')) {
                 const item = localStorage.getItem(key);
                 const info = JSON.parse(item);
@@ -36,6 +38,7 @@ const doStuff = async () => {
                 check = false;
             }
         });
+
         return presenceToken;
     });
 
@@ -81,7 +84,7 @@ const doStuff = async () => {
                     message = `Playing ${activity.name} (${activity.details}) (${activity.state}) ${getTimeFormatted(elapsed.getMinutes())}:${getTimeFormatted(elapsed.getSeconds())} elapsed`;
                 }
     
-                  const config = {
+                const config = {
                     method: 'PUT',
                     url: 'https://presence.teams.microsoft.com/v1/me/publishnote',
                     headers: {
@@ -92,9 +95,9 @@ const doStuff = async () => {
                         expiry: expire,
                         message: message + '<pinnednote></pinnednote>'
                     })
-                  };
+                };
                 
-                  axios(config)
+                axios(config)
                     .then(() => console.log('Posted successfully'))
                     .catch((error) =>  console.log(error));
             });
@@ -106,7 +109,9 @@ const doStuff = async () => {
         setInterval(async () => {
             try {
                 await setStatus(client);
-            } catch (e) { }
+            } catch (e) { 
+                console.log(e);
+            }
         }, 15000);
     });
     
